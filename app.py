@@ -3,19 +3,20 @@ import pandas as pd
 import numpy as np
 import joblib
 
+
 def predict(data):
     clf = joblib.load("DecisionTree_Model.sav")
     return clf.predict(data)
 
 # Function to map classes to images
 def class_to_image(class_name):
-    if class_name == "minor":
+    if class_name == "Minor":
         return "images/minor.jpg"  
-    elif class_name == "moderate":
+    elif class_name == "Moderate":
         return "images/moderate.jpg"  
-    elif class_name == "serious":
+    elif class_name == "Serious":
         return "images/serious.jpg"  
-    elif class_name == "fatal":
+    elif class_name == "Fatal":
         return "images/fatal.jpeg"  
 
 st.title('Classifying Road Accident Severity')
@@ -50,10 +51,21 @@ st.text('')
 if st.button("Predict Accident Severity"):
     result = predict(
         np.array([[temp, visib, press, prec, humid, wind_c, wind_s]]))
-    st.text(result[0])
+    if(result[0] == 1):
+        resultName = 'Minor'
+        st.text('Minor')
+    elif(result[0] == 2):
+        resultName = 'Moderate'
+        st.text('Moderate')
+    elif(result[0] == 3):
+        resultName = 'Serious'
+        st.text('Serious')
+    elif(result[0] == 4):
+        resultName = 'Fatal'
+        st.text('Fatal')
 
     # Display the image/icon corresponding to the predicted class
-    image_path = class_to_image(result[0].split("-")[1])
+    image_path = class_to_image(resultName)
     st.image(image_path, use_column_width=True)
 
 
