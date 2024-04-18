@@ -19,14 +19,13 @@ def class_to_image(class_name):
         return "images/fatal.jpeg"  
 
 st.title('Classifying Road Accident Severity')
-st.markdown('Model to classify severity flowers into \
+st.markdown('Model to classify road accidents severity into \
      (Minor, Moderate, Serious, Fatal) based on their Temperature(F), \
      Visibility(mi), Pressure(in), Precipitation(in), Humidity(%), \
      Wind chill(F), and Wind speed(mph).')
 
 st.header("Road Accidents Features")
-col1, col2, col3 = st.columns(3)
-col4 = st.columns(1)
+col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     st.text("Wind Characteristics")
